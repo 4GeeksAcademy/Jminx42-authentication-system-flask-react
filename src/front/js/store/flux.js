@@ -55,8 +55,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello", opts)
+					const resp = await fetch("https://jminx42-special-potato-vjxpr9v7959fwjxq-3001.preview.app.github.dev/api/hello", opts)
 					const data = await resp.json()
+					console.log("checking what this does " + process.env.BACKEND_URL + "api/hello")
 					setStore({ message: data.message })
 				} catch (error) {
 					console.log("Error loading message from backend", error)
