@@ -1,9 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
+	const handleClick = () => {
+		actions.logout()
+		navigate('/')
+	}
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
@@ -12,11 +17,20 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 					{!store.token ?
-						<Link to="/login">
-							<button className="btn btn-primary">Login</button>
-						</Link> :
+						<div>
+							<Link to="/login">
+								<button className="btn btn-primary me-2">Login</button>
+							</Link>
+							<Link to="/signup">
+								<button className='btn btn-success'>Sign up</button>
+							</Link>
 
-						<button className="btn btn-primary" onClick={() => actions.logout()}>Log out</button>
+						</div>
+
+
+						:
+
+						<button className="btn btn-primary" onClick={handleClick}>Log out</button>
 
 					}
 
