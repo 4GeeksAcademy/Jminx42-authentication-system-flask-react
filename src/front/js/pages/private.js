@@ -2,13 +2,20 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export const Private = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 
-		if (store.token && store.token !== "" && store.token != undefined) actions.getMessage();
+		if (store.token && store.token !== "" && store.token != undefined) {
+			actions.getMessage()
+		} else {
+			navigate('/login')
+		}
+
 	}, [store.token]);
 
 	return (
